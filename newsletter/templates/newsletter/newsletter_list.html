@@ -1,0 +1,23 @@
+{% extends 'newsletter/base.html' %}
+
+{% block content %}
+<div class="row md-5">
+    {% for item in object_list %}
+    <div class="card">
+        <div class="card-header">
+            {{ item.status_of_mailing }}
+        </div>
+        <div class="card-body">
+            <p class="card-text">{{ item.time_mailing }}</p>
+            <p class="card-text">{{ item.message }}</p>
+            <p class="card-text">{{ item.client }}</p>
+        </div>
+        <div class="card-footer">
+            <a href="{% url 'newsletter:view_newsletter' item.pk %}" class="btn btn-outline-primary">Просмотреть</a>
+            <a href="{% url 'newsletter:edit_newsletter' item.pk %}" class="btn btn-outline-info">Изменить</a>
+            <a href="{% url 'newsletter:delete_newsletter' item.pk %}" class="btn btn-outline-danger">Удалить</a>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
