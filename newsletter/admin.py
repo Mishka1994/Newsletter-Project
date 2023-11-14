@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from newsletter.models import Message, Client
+from newsletter.models import Message, Client, Newsletter
 
 
 @admin.register(Message)
@@ -12,6 +12,13 @@ class MessageAdmin(admin.ModelAdmin):
 
 @admin.register(Client)
 class ClientAdmin(admin.ModelAdmin):
-    list_display = ('email', 'full_name', 'comment',)
-    list_filter = ('full_name',)
+    list_display = ('id', 'email', 'full_name', 'comment',)
     search_fields = ('email', 'full_name',)
+    ordering = ('id',)
+
+
+@admin.register(Newsletter)
+class Newsletter(admin.ModelAdmin):
+    list_display = ('id', 'time_mailing', 'period', 'status_of_mailing', 'message',)
+    search_fields = ('status_of_mailing', 'client',)
+    ordering = ('id',)

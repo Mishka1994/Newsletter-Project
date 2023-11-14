@@ -1,0 +1,14 @@
+{% extends 'newsletter/base.html' %}
+
+
+{% block content %}
+
+<div class="card text-center" style="width: 18rem;">
+  <div class="card-body">
+    <h5 class="card-title">{{ object.status_of_mailing }}</h5>
+    <p class="card-text">{{ object.time_mailing }}</p>
+    <a href="{% url 'newsletter:list_newsletter' %}" class="btn btn-primary">К списку продуктов</a>
+  </div>
+</div>
+
+{% endblock %}

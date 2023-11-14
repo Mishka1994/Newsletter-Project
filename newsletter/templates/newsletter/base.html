@@ -52,7 +52,7 @@
   <h5 class="my-0 mr-md-auto font-weight-normal">Название компании</h5>
   <nav class="my-2 my-md-0 mr-md-3">
     <a class="p-2 text-dark" href="#">Возможности</a>
-    <a class="p-2 text-dark" href="#">Enterprise</a>
+    <a class="btn btn-outline-primary p-2" href="{% url 'newsletter:list_newsletter' %}">Список рассылок</a>
     <a class="p-2 text-dark" href="#">Поддержка</a>
     <a class="p-2 text-dark" href="#">Цены</a>
   </nav>
@@ -63,98 +63,9 @@
   <h1 class="display-4">Ценообразование</h1>
   <p class="lead">С помощью этого примера Bootstrap быстро создайте эффективную таблицу цен для ваших потенциальных клиентов. Он построен с использованием компонентов и утилит Bootstrap по умолчанию с небольшой настройкой.</p>
 </div>
+{% block content %}
 
-<div class="container">
-  <div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
-    <div class="col">
-      <div class="card mb-4 shadow-sm">
-      <div class="card-header">
-        <h4 class="my-0 font-weight-normal">Бесплатно</h4>
-      </div>
-      <div class="card-body">
-        <h1 class="card-title pricing-card-title">$0 <small class="text-muted">/ мес.</small></h1>
-        <ul class="list-unstyled mt-3 mb-4">
-          <li>Включено 10 пользователей</li>
-          <li>2 ГБ памяти</li>
-          <li>Поддержка по email</li>
-          <li>Доступ к справочному центру</li>
-        </ul>
-        <button type="button" class="btn btn-lg btn-block btn-outline-primary">Подпишитесь бесплатно</button>
-      </div>
-    </div>
-    </div>
-    <div class="col">
-      <div class="card mb-4 shadow-sm">
-      <div class="card-header">
-        <h4 class="my-0 font-weight-normal">Pro</h4>
-      </div>
-      <div class="card-body">
-        <h1 class="card-title pricing-card-title">$15 <small class="text-muted">/ мес.</small></h1>
-        <ul class="list-unstyled mt-3 mb-4">
-          <li>Включено 20 пользователей</li>
-          <li>10 ГБ памяти</li>
-          <li>Приоритетная поддержка по email</li>
-          <li>Доступ к справочному центру</li>
-        </ul>
-        <button type="button" class="btn btn-lg btn-block btn-primary">Начать</button>
-      </div>
-    </div>
-    </div>
-    <div class="col">
-      <div class="card mb-4 shadow-sm">
-      <div class="card-header">
-        <h4 class="my-0 font-weight-normal">Enterprise</h4>
-      </div>
-      <div class="card-body">
-        <h1 class="card-title pricing-card-title">$29 <small class="text-muted">/ мес.</small></h1>
-        <ul class="list-unstyled mt-3 mb-4">
-          <li>Включено 30 пользователей</li>
-          <li>15 ГБ памяти</li>
-          <li>Поддержка по телефону и email</li>
-          <li>Доступ к справочному центру</li>
-        </ul>
-        <button type="button" class="btn btn-lg btn-block btn-primary">Связаться с нами</button>
-      </div>
-    </div>
-    </div>
-  </div>
-
-  <footer class="pt-4 my-md-5 pt-md-5 border-top">
-    <div class="row">
-      <div class="col-12 col-md">
-        <img class="mb-2" src="/img/brand/bootstrap-solid.svg" alt="логотип bootstrap" width="24" height="24">
-        <small class="d-block mb-3 text-muted">&copy; 2017-2020</small>
-      </div>
-      <div class="col-6 col-md">
-        <h5>Особенности</h5>
-        <ul class="list-unstyled text-small">
-          <li><a class="link-secondary" href="#">Прикольная штука</a></li>
-          <li><a class="link-secondary" href="#">Случайная особенность</a></li>
-          <li><a class="link-secondary" href="#">Особенность команды</a></li>
-          <li><a class="link-secondary" href="#">Материал для разработчиков</a></li>
-        </ul>
-      </div>
-      <div class="col-6 col-md">
-        <h5>Ресурсы</h5>
-        <ul class="list-unstyled text-small">
-          <li><a class="link-secondary" href="#">Ресурс</a></li>
-          <li><a class="link-secondary" href="#">Название ресурса</a></li>
-          <li><a class="link-secondary" href="#">Другой ресурс</a></li>
-          <li><a class="link-secondary" href="#">Заключительный ресурс</a></li>
-        </ul>
-      </div>
-      <div class="col-6 col-md">
-        <h5>О нас</h5>
-        <ul class="list-unstyled text-small">
-          <li><a class="link-secondary" href="#">Команда</a></li>
-          <li><a class="link-secondary" href="#">Местоположение</a></li>
-          <li><a class="link-secondary" href="#">Конфиденциальность</a></li>
-          <li><a class="link-secondary" href="#">Сроки</a></li>
-        </ul>
-      </div>
-    </div>
-  </footer>
-</div>
+{% endblock %}
 <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
 </body>
 </html>
