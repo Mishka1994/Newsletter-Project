@@ -19,6 +19,6 @@ class ClientAdmin(admin.ModelAdmin):
 
 @admin.register(Newsletter)
 class Newsletter(admin.ModelAdmin):
-    list_display = ('id', 'time_mailing', 'period', 'status_of_mailing', 'message',)
+    list_display = ('id', 'period', 'status_of_mailing', 'message',)
     search_fields = ('status_of_mailing', 'client',)
     ordering = ('id',)

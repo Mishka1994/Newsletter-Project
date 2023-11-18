@@ -8,14 +8,20 @@
             {{ item.status_of_mailing }}
         </div>
         <div class="card-body">
+
             <p class="card-text">{{ item.time_mailing }}</p>
             <p class="card-text">{{ item.message }}</p>
-            <p class="card-text">{{ item.client }}</p>
+            <p class="card-text">Клиенты:
+            {% for element in item.client.all  %}
+                    {{ element.full_name }},
+                {% endfor %}
+            </p>
         </div>
         <div class="card-footer">
             <a href="{% url 'newsletter:view_newsletter' item.pk %}" class="btn btn-outline-primary">Просмотреть</a>
             <a href="{% url 'newsletter:edit_newsletter' item.pk %}" class="btn btn-outline-info">Изменить</a>
             <a href="{% url 'newsletter:delete_newsletter' item.pk %}" class="btn btn-outline-danger">Удалить</a>
+            <a href="{% url 'newsletter:start_newsletter' item.pk %}" class="btn btn-outline-success">Запустить рассылку</a>
         </div>
     </div>
     {% endfor %}

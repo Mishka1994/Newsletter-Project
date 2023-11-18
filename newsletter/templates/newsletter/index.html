@@ -1,65 +1,64 @@
 {% extends 'newsletter/base.html' %}
+{% load my_tags%}
 
 
 {% block content %}
-<div class="container">
-  <div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
-    <div class="col">
-      <div class="card mb-4 shadow-sm">
-      <div class="card-header">
-        <h4 class="my-0 font-weight-normal">Бесплатно</h4>
-      </div>
-      <div class="card-body">
-        <h1 class="card-title pricing-card-title">$0 <small class="text-muted">/ мес.</small></h1>
-        <ul class="list-unstyled mt-3 mb-4">
-          <li>Включено 10 пользователей</li>
-          <li>2 ГБ памяти</li>
-          <li>Поддержка по email</li>
-          <li>Доступ к справочному центру</li>
-        </ul>
-        <a href="{% url 'newsletter:create_newsletter' %}" class="btn btn-outline-primary">Создать рассылку</a>
-      </div>
-    </div>
-    </div>
-    </div>
-    </div>
-  </div>
+<div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+    <h1 class="display-4">Создай свою рассылку, приведи клиентов</h1>
+    <p class="lead">Какой-то хороший текст</p>
+</div>
+<div class="row">
+    <div class="col-12">
 
-  <footer class="pt-4 my-md-5 pt-md-5 border-top">
-    <div class="row">
-      <div class="col-12 col-md">
-        <img class="mb-2" src="/img/brand/bootstrap-solid.svg" alt="логотип bootstrap" width="24" height="24">
-        <small class="d-block mb-3 text-muted">&copy; 2017-2020</small>
-      </div>
-      <div class="col-6 col-md">
-        <h5>Особенности</h5>
-        <ul class="list-unstyled text-small">
-          <li><a class="link-secondary" href="#">Прикольная штука</a></li>
-          <li><a class="link-secondary" href="#">Случайная особенность</a></li>
-          <li><a class="link-secondary" href="#">Особенность команды</a></li>
-          <li><a class="link-secondary" href="#">Материал для разработчиков</a></li>
-        </ul>
-      </div>
-      <div class="col-6 col-md">
-        <h5>Ресурсы</h5>
-        <ul class="list-unstyled text-small">
-          <li><a class="link-secondary" href="#">Ресурс</a></li>
-          <li><a class="link-secondary" href="#">Название ресурса</a></li>
-          <li><a class="link-secondary" href="#">Другой ресурс</a></li>
-          <li><a class="link-secondary" href="#">Заключительный ресурс</a></li>
-        </ul>
-      </div>
-      <div class="col-6 col-md">
-        <h5>О нас</h5>
-        <ul class="list-unstyled text-small">
-          <li><a class="link-secondary" href="#">Команда</a></li>
-          <li><a class="link-secondary" href="#">Местоположение</a></li>
-          <li><a class="link-secondary" href="#">Конфиденциальность</a></li>
-          <li><a class="link-secondary" href="#">Сроки</a></li>
-        </ul>
-      </div>
+        <div class="container">
+            <div class="col-7">
+                <p>
+                    <a href="{% url 'newsletter:create_newsletter' %}" class="btn btn-primary my-2">Создать рассылку</a>
+                    <a href="{% url 'newsletter:list_newsletter' %}" class="btn btn-primary my-2">Просмотреть список
+                        рассылок</a>
+                    <a href="#" class="btn btn-primary my-2">Перейти в блог</a>
+                </p>
+            </div>
+        </div>
+
+
+        <footer class="pt-4 my-md-5 pt-md-5 border-top">
+            <div class="row">
+                <div class="col-12 col-md">
+                    <img class="mb-2" src="/img/brand/bootstrap-solid.svg" alt="логотип bootstrap" width="24"
+                         height="24">
+                    <small class="d-block mb-3 text-muted">&copy; 2017-2020</small>
+                </div>
+                <div class="col-6 col-md">
+                    <h5>Особенности</h5>
+                    <ul class="list-unstyled text-small">
+                        <li><a class="link-secondary" href="#">Прикольная штука</a></li>
+                        <li><a class="link-secondary" href="#">Случайная особенность</a></li>
+                        <li><a class="link-secondary" href="#">Особенность команды</a></li>
+                        <li><a class="link-secondary" href="#">Материал для разработчиков</a></li>
+                    </ul>
+                </div>
+                <div class="col-6 col-md">
+                    <h5>Ресурсы</h5>
+                    <ul class="list-unstyled text-small">
+                        <li><a class="link-secondary" href="#">Ресурс</a></li>
+                        <li><a class="link-secondary" href="#">Название ресурса</a></li>
+                        <li><a class="link-secondary" href="#">Другой ресурс</a></li>
+                        <li><a class="link-secondary" href="#">Заключительный ресурс</a></li>
+                    </ul>
+                </div>
+                <div class="col-6 col-md">
+                    <h5>О нас</h5>
+                    <ul class="list-unstyled text-small">
+                        <li><a class="link-secondary" href="#">Команда</a></li>
+                        <li><a class="link-secondary" href="#">Местоположение</a></li>
+                        <li><a class="link-secondary" href="#">Конфиденциальность</a></li>
+                        <li><a class="link-secondary" href="#">Сроки</a></li>
+                    </ul>
+                </div>
+            </div>
+        </footer>
     </div>
-  </footer>
 </div>
 
 {% endblock %}

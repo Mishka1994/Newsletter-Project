@@ -15,7 +15,6 @@ from pathlib import Path
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
@@ -26,7 +25,6 @@ SECRET_KEY = 'django-insecure-o=5h+ji%&su37@zl*ipvl*3*do(pnv=d)=1(_=hz%%k+yg+l3(
 DEBUG = True
 
 ALLOWED_HOSTS = []
-
 
 # Application definition
 
@@ -39,6 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'newsletter',
+    'users',
+    'django_crontab',
 
 ]
 
@@ -72,7 +72,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'config.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
@@ -84,7 +83,6 @@ DATABASES = {
         'PASSWORD': '12345'
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
@@ -104,18 +102,16 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
 
 LANGUAGE_CODE = 'ru-ru'
 
-TIME_ZONE = 'Europe/Moscow'
+TIME_ZONE = 'Asia/Omsk'
 
 USE_I18N = True
 
 USE_TZ = True
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
@@ -124,9 +120,25 @@ STATIC_URL = 'static/'
 
 STATICFILES_DIRS = (
     BASE_DIR / 'static',
-)\
-
-# Default primary key field type
+) \
+ \
+    # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+CRONJOBS = [
+    ('01 00 */1 * * ', 'newsletter.cron.check_complete_mailing'),  # Проверка завершенных рассылок
+    ('00 12 */1 * *', 'newsletter.cron.once_a_week_mailing'),  # Каждый день
+    ('00 12 * * 3', 'newsletter.cron.once_a_week_mailing'),  # Каждую неделю
+    ('00 12 10 * *', 'newsletter.cron.once_a_month_mailing')  # Каждый месяц
+
+]
+
+EMAIL_HOST = 'smtp.yandex.ru'
+EMAIL_PORT = 465
+EMAIL_HOST_USER = 'samofalovmaikl@yandex.ru'
+EMAIL_HOST_PASSWORD = 'hfebjikqkovpsdwx'
+EMAIL_USE_SSL = True
+
+AUTH_USER_MODEL = 'users.User'
