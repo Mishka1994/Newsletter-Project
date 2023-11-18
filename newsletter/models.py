@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib import admin
+from datetime import datetime
 
 NULLABLE = {'blank': True, 'null': True}
 
@@ -22,7 +23,7 @@ class Client(models.Model):
     comment = models.TextField(verbose_name='Комментарий', **NULLABLE)
 
     def __str__(self):
-        return f'{self.full_name}'
+        return f'{self.email}'
 
     class Meta:
         verbose_name = 'Клиент'
@@ -31,9 +32,9 @@ class Client(models.Model):
 
 class Newsletter(models.Model):
     # Периодичность для рассылок
-    ONCE_A_DAY = 'OD'
-    ONCE_A_WEEK = 'OW'
-    ONCE_A_MONTH = 'OM'
+    ONCE_A_DAY = 'ONCE_DAY'
+    ONCE_A_WEEK = 'ONCE_WEEK'
+    ONCE_A_MONTH = 'ONCE_MONT'
 
     frequency_of_mailing = [
         (ONCE_A_DAY, 'Раз в день'),
@@ -42,16 +43,16 @@ class Newsletter(models.Model):
     ]
 
     # Статусы для рассылок
-    COMPLETED = 'COM'
-    CREATED = 'CRE'
-    LAUNCHED = 'LAU'
+    COMPLETED = 'COMPLETE'
+    CREATED = 'CREATED'
+    LAUNCHED = 'LAUNCHED'
     statuses = [
         (COMPLETED, 'Завершена'),
         (CREATED, 'Создана'),
         (LAUNCHED, 'Запущена')
     ]
 
-    time_mailing = models.DateTimeField(verbose_name='Время отправления')
+    time_mailing = models.TimeField(default=datetime.now(), verbose_name='Время рассылки')
     period = models.CharField(
         max_length=100,
         choices=frequency_of_mailing,
@@ -64,10 +65,25 @@ class Newsletter(models.Model):
     )
     message = models.ForeignKey(Message, on_delete=models.PROTECT, verbose_name='Текст рассылки')
     client = models.ManyToManyField(Client, verbose_name='Клиент для рассылки', related_name='clients')
+    end_of_mailing = models.DateTimeField(verbose_name='Дата и время окончание рассылки', default='2024-01-01 12:00')
 
     def __str__(self):
-        return f'{self.status_of_mailing}'
+        return f'{self.status_of_mailing})'
 
     class Meta:
         verbose_name = 'Рассылка'
         verbose_name_plural = 'Рассылки'
+
+
+class MailingLogs(models.Model):
+    datetime_last_mailing = models.DateTimeField(auto_now=True, verbose_name='Дата и время последней рассылки')
+    result_mailing = models.CharField(max_length=50, verbose_name='результат попытки')
+    answer_mailing_service = models.CharField(max_length=255, verbose_name='Ответ почтового сервиса')
+    newsletter = models.ForeignKey(Newsletter, on_delete=models.CASCADE, verbose_name='Рассылка')
+
+    class Meta:
+        verbose_name = 'Набор логов'
+        verbose_name_plural = 'Наборы логов'
+
+    def __str__(self):
+        return f'{self.result_mailing}'
