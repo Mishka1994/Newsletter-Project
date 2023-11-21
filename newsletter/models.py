@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.db import models
 from django.contrib import admin
 from datetime import datetime
@@ -66,9 +67,11 @@ class Newsletter(models.Model):
     message = models.ForeignKey(Message, on_delete=models.PROTECT, verbose_name='Текст рассылки')
     client = models.ManyToManyField(Client, verbose_name='Клиент для рассылки', related_name='clients')
     end_of_mailing = models.DateTimeField(verbose_name='Дата и время окончание рассылки', default='2024-01-01 12:00')
+    creator = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, verbose_name='Создатель рассылки',
+                                **NULLABLE)
 
     def __str__(self):
-        return f'{self.status_of_mailing})'
+        return f'{self.message}, {self.status_of_mailing}'
 
     class Meta:
         verbose_name = 'Рассылка'

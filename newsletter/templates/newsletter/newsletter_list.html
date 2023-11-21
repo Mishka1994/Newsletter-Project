@@ -2,26 +2,38 @@
 
 {% block content %}
 <div class="row md-5">
-    {% for item in object_list %}
-    <div class="card">
-        <div class="card-header">
-            {{ item.status_of_mailing }}
-        </div>
-        <div class="card-body">
 
-            <p class="card-text">{{ item.time_mailing }}</p>
-            <p class="card-text">{{ item.message }}</p>
-            <p class="card-text">Клиенты:
-            {% for element in item.client.all  %}
+    {% for item in object_list %}
+    <div class="col-4">
+        <div class="card">
+            <div class="card-header">
+                {{ item.status_of_mailing }}
+            </div>
+            <div class="card-body text-center">
+
+                <p class="card-text">{{ item.time_mailing }}</p>
+                <p class="card-text">{{ item.message }}</p>
+                <p class="card-test">{{ item.creator }}</p>
+                <p class="card-text">Клиенты:
+                    {% for element in item.client.all %}
                     {{ element.full_name }},
-                {% endfor %}
-            </p>
-        </div>
-        <div class="card-footer">
-            <a href="{% url 'newsletter:view_newsletter' item.pk %}" class="btn btn-outline-primary">Просмотреть</a>
-            <a href="{% url 'newsletter:edit_newsletter' item.pk %}" class="btn btn-outline-info">Изменить</a>
-            <a href="{% url 'newsletter:delete_newsletter' item.pk %}" class="btn btn-outline-danger">Удалить</a>
-            <a href="{% url 'newsletter:start_newsletter' item.pk %}" class="btn btn-outline-success">Запустить рассылку</a>
+                    {% endfor %}
+                </p>
+            </div>
+            <div class="card-footer px-md-4 mb-3">
+                <a href="{% url 'newsletter:view_newsletter' item.pk %}" class="btn btn-outline-primary">Просмотреть</a>
+                {% if user.is_staff and not item.status_of_mailing == 'COMPLETE'%}
+
+                <a href="{% url 'newsletter:deactivate_newsletter' item.pk %}" class="btn btn-outline-primary">Отключить
+                    рассылку</a>
+                {% endif %}
+                {% if item.creator == user %}
+                <a href="{% url 'newsletter:edit_newsletter' item.pk %}" class="btn btn-outline-info ">Изменить</a>
+                <a href="{% url 'newsletter:delete_newsletter' item.pk %}" class="btn btn-outline-danger px-md-4 ">Удалить</a>
+                <a href="{% url 'newsletter:start_newsletter' item.pk %}" class="btn btn-outline-success px-md-4 mb-3">Запустить
+                    рассылку</a>
+                {% endif %}
+            </div>
         </div>
     </div>
     {% endfor %}
