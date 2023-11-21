@@ -1,6 +1,6 @@
 from django import forms
 
-from newsletter.models import Newsletter
+from newsletter.models import Newsletter, Client, MailingLogs
 
 
 class DesignFormMixin:
@@ -13,4 +13,16 @@ class DesignFormMixin:
 class NewsletterForm(DesignFormMixin, forms.ModelForm):
     class Meta:
         model = Newsletter
+        exclude = ('status_of_mailing', )
+
+
+class ClientForm(DesignFormMixin, forms.ModelForm):
+    class Meta:
+        model = Client
+        fields = '__all__'
+
+
+class MailingLogsForm(DesignFormMixin, forms.ModelForm):
+    class Meta:
+        model = MailingLogs
         fields = '__all__'

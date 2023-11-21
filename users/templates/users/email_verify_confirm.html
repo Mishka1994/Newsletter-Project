@@ -1,0 +1,31 @@
+{% extends 'newsletter/base.html' %}
+
+{% block content %}
+<div class="col-12">
+    <form class="row" method="post">
+        <div class="col-3"></div>
+        <div class="col-6">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">
+                        Подтверждение электронной почты
+                    </h3>
+                </div>
+                <div class="card-body">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                     <div class="card-text">
+                    Чтобы отправить сообщение с ссылкой для подтверждения электронной почты, нажмите кнопку ниже.
+                    </div>
+                    <button type="submit" class="btn btn-primary mt-3">
+                        Отправить
+                    </button>
+                </div>
+                <div class="card-footer">
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+{% endblock %}

@@ -36,8 +36,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+
     'newsletter',
     'users',
+    'blog',
     'django_crontab',
 
 ]
@@ -50,6 +52,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
 ]
 
 ROOT_URLCONF = 'config.urls'
@@ -65,9 +68,14 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'django.template.context_processors.request',
             ],
         },
     },
+]
+
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
 ]
 
 WSGI_APPLICATION = 'config.wsgi.application'
@@ -111,7 +119,7 @@ TIME_ZONE = 'Asia/Omsk'
 
 USE_I18N = True
 
-USE_TZ = True
+USE_TZ = False
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
@@ -120,20 +128,32 @@ STATIC_URL = 'static/'
 
 STATICFILES_DIRS = (
     BASE_DIR / 'static',
-) \
- \
-    # Default primary key field type
+)
+
+# Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 CRONJOBS = [
     ('01 00 */1 * * ', 'newsletter.cron.check_complete_mailing'),  # Проверка завершенных рассылок
-    ('00 12 */1 * *', 'newsletter.cron.once_a_week_mailing'),  # Каждый день
+    ('00 12 */1 * *', 'newsletter.cron.once_a_day_mailing'),  # Каждый день
     ('00 12 * * 3', 'newsletter.cron.once_a_week_mailing'),  # Каждую неделю
     ('00 12 10 * *', 'newsletter.cron.once_a_month_mailing')  # Каждый месяц
 
 ]
+
+CACHES = {
+    "default": {
+        "BACKEND": "django.core.cache.backends.redis.RedisCache",
+        "LOCATION": "redis://127.0.0.1:6379",
+    }
+}
+
+CACHE_ENABLED = True
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
 
 EMAIL_HOST = 'smtp.yandex.ru'
 EMAIL_PORT = 465
@@ -142,3 +162,7 @@ EMAIL_HOST_PASSWORD = 'hfebjikqkovpsdwx'
 EMAIL_USE_SSL = True
 
 AUTH_USER_MODEL = 'users.User'
+
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/'
+LOGIN_URL = '/users/'

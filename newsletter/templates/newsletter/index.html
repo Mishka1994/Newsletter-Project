@@ -3,23 +3,53 @@
 
 
 {% block content %}
-<div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
-    <h1 class="display-4">Создай свою рассылку, приведи клиентов</h1>
-    <p class="lead">Какой-то хороший текст</p>
+<div class="row">
+    <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+        <h1 class="display-4">Создай свою рассылку, приведи клиентов</h1>
+        <p class="lead">Какой-то хороший текст</p>
+    </div>
 </div>
 <div class="row">
-    <div class="col-12">
-
-        <div class="container">
-            <div class="col-7">
-                <p>
-                    <a href="{% url 'newsletter:create_newsletter' %}" class="btn btn-primary my-2">Создать рассылку</a>
-                    <a href="{% url 'newsletter:list_newsletter' %}" class="btn btn-primary my-2">Просмотреть список
-                        рассылок</a>
-                    <a href="#" class="btn btn-primary my-2">Перейти в блог</a>
-                </p>
+    {% for item in articles %}
+    <div class="col-4">
+        <div class="card">
+            <div class="card-header">
+                {{ item.title }}
+            </div>
+            <div class="card-body">
+                <p class="card-text text-center">{{ item.image }}</p>
+                <p class="card-text text-center">{{ item.article_content }}</p>
+            </div>
+            <div class="card-footer">
+                <p class="card-text">Просмотры: {{ item.number_of_views }}</p>
+                <p class="card-text">Дата публикации: {{ item.publication_date}}</p>
             </div>
         </div>
+    </div>
+    {%endfor%}
+</div>
+
+<div class="col-12 md-5 ">
+    <div class="row">
+        <div class="col-4"></div>
+        {% if perms.users.set_is_active_status %}
+        <div class="col-4">
+            <div class="card">
+                <div class="card-body text-center form-control">
+                    <a href="{% url 'users:list_user' %}" class="btn btn-primary my-2 form-control">Список
+                        пользователей</a>
+                </div>
+            </div>
+        </div>
+        {% else %}
+        <div class="col-4">
+            <div class="card">
+                <div class="card-body text-center form-control">
+                    <a href="#" class="btn btn-primary my-2 form-control">Перейти в блог</a>
+                </div>
+            </div>
+        </div>
+        {% endif %}
 
 
         <footer class="pt-4 my-md-5 pt-md-5 border-top">

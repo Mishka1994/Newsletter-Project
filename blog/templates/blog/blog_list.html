@@ -1,0 +1,26 @@
+{% extends 'newsletter/base.html' %}
+
+
+{% block content %}
+<div class="row">
+    {% for item in object_list %}
+    <div class="col-4">
+        <div class="card">
+            <div class="card-header">
+                {{ item.title }}
+            </div>
+            <div class="card-body">
+                <p class="card-text text-center">{{ item.image }}</p>
+                <p class="card-text text-center">{{ item.article_content }}</p>
+            </div>
+            <div class="card-footer">
+                <p class="card-text">Просмотры: {{ item.number_of_views }}</p>
+                <p class="card-text">Дата публикации: {{ item.publication_date}}</p>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+
+{% endblock %}
